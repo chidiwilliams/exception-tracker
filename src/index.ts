@@ -1,41 +1,38 @@
-interface ExceptionStore {
-  Store(exceptionInfo: ExceptionInfo): Promise<void>;
-}
+import { ExceptionStore } from 'trackerr-abstract-exception-store';
 
-type ExceptionInfo = {
-  stack: string;
-  timestamp: Date;
-};
+type Middleware = (
+  req: { path: string },
+  res: { json: (...a: any) => any },
+  next: Function,
+) => Promise<void>;
 
-class Client {
-  constructor(private store: ExceptionStore) {
+export class Client {
+  private exceptionsPageRoute = '/__exceptions';
+
+  constructor(private exceptionStore: ExceptionStore) {
     process.on('uncaughtException', async (err) => {
       await this.storeException(err);
-
       console.error('Uncaught exception:', err);
       process.exit(1);
     });
   }
 
-  async storeException(err: Error) {
-    return this.store.Store({
+  private async storeException(err: Error) {
+    return this.exceptionStore.store({
       stack: err.stack!,
       timestamp: new Date(),
     });
   }
-}
 
-class NullExceptionStore implements ExceptionStore {
-  constructor() {}
+  middleware(): Middleware {
+    return async (req, res, next) => {
+      if (req.path !== this.exceptionsPageRoute) {
+        next();
+        return;
+      }
 
-  Store(exceptionInfo: ExceptionInfo): Promise<void> {
-    console.log(JSON.stringify(exceptionInfo));
-    return Promise.resolve();
+      const exceptions = await this.exceptionStore.get();
+      return res.json({ exceptions });
+    };
   }
 }
-
-setInterval(() => {}, 50000);
-
-new Client(new NullExceptionStore());
-
-throw Error('Hello');

@@ -1,9 +1,10 @@
 {
-  "name": "exception-tracker",
+  "name": "trackerr",
   "version": "0.0.1",
-  "description": "Express/Koa exception tracking middleware",
+  "description": "Simple exception tracking for Express/Koa servers",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
