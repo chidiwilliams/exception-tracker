@@ -1,8 +1,11 @@
 import ejs from 'ejs';
-import { ExceptionStore } from 'trackerr-abstract-exception-store';
+import {
+  ExceptionQueryOpts,
+  ExceptionStore,
+} from 'trackerr-abstract-exception-store';
 
 type Middleware = (
-  req: { path: string },
+  req: { path: string; query: { [k: string]: string } },
   res: { send: (...a: any) => any },
   next: Function,
 ) => Promise<void>;
@@ -32,7 +35,12 @@ export class Client {
         return;
       }
 
-      const exceptions = await this.exceptionStore.get();
+      const queryOpts: ExceptionQueryOpts = { timestampOrder: 'desc' };
+      if (req.query.timestampOrder === 'asc') {
+        queryOpts.timestampOrder = req.query.timestampOrder;
+      }
+
+      const exceptions = await this.exceptionStore.get(queryOpts);
       const template = await ejs.renderFile('templates/trackerr.html', {
         exceptions,
       });
