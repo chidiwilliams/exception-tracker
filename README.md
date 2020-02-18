@@ -2,15 +2,15 @@
 
 Simple exception tracking for small Express/Koa servers.
 
-## 🌟 Features
+## Features
 
-- 📜 Log uncaught exceptions to a data store of your choice
+- Log uncaught exceptions to a data store of your choice
 
-- 🌐 View exceptions in the browser with an Express/Koa middleware from your app
+- View exceptions in the browser with an Express/Koa middleware from your app
 
-- 🔔 Get notified via email when an exception occurs (TODO)
+- Get notified via email when an exception occurs (TODO)
 
-## 🔧 Installation
+## Installation
 
 Install with NPM:
 
@@ -24,7 +24,7 @@ or Yarn:
 yarn add trackerr
 ```
 
-## 📖 Usage
+## Usage
 
 Create a new client with a data store:
 
@@ -45,7 +45,13 @@ server.use(client.middleware());
 
 The middleware will serve the trackerr page at `/__exceptions`.
 
-## 🚧 Roadmap to V1
+## Data stores
+
+The exception data may be stored in any data store of your choice. You may use one of the following maintained data stores or write your own plugin by implementing the `ExceptionDataStore` interface in [tracker-abstract-datastore](https://github.com/chidiwilliams/trackerr-abstract-exception-store).
+
+- [SQLite](https://github.com/chidiwilliams/trackerr-sqlite)
+
+## Roadmap to V1
 
 - [ ] Email notifications
 - [ ] Search on exceptions page
