@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/ejs": "^3.0.0",
     "@types/node": "^13.7.1",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "ejs": "^3.0.1"
   }
 }

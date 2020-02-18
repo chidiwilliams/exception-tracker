@@ -1,8 +1,9 @@
+import ejs from 'ejs';
 import { ExceptionStore } from 'trackerr-abstract-exception-store';
 
 type Middleware = (
   req: { path: string },
-  res: { json: (...a: any) => any },
+  res: { send: (...a: any) => any },
   next: Function,
 ) => Promise<void>;
 
@@ -32,7 +33,11 @@ export class Client {
       }
 
       const exceptions = await this.exceptionStore.get();
-      return res.json({ exceptions });
+      const template = await ejs.renderFile('templates/trackerr.html', {
+        exceptions,
+      });
+
+      return res.send(template);
     };
   }
 }
