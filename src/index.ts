@@ -43,6 +43,7 @@ export class Client {
       const exceptions = await this.exceptionStore.get(queryOpts);
       const template = await ejs.renderFile('templates/trackerr.html', {
         exceptions,
+        timestampOrder: queryOpts.timestampOrder,
       });
 
       return res.send(template);

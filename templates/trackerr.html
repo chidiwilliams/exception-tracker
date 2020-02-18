@@ -21,11 +21,18 @@
 
     <main>
       <div class="container">
-        <h3 class="mb-3">Exceptions</h3>
-        <div class="mb-3 p-3" style="background-color: #f9f9f9;">
+        <div class="controls mb-3">
+          <a
+            href="?timestampOrder=<%= timestampOrder === 'asc' ? 'desc' : 'asc' %>"
+            class="btn btn-light font-weight-bold"
+          >
+            <%= timestampOrder === 'asc' ? 'Tail' : 'Head' %>
+          </a>
+        </div>
+        <div class="mb-3 p-3 bg-light">
           <code>
             <% exceptions.forEach(function(exception){ %>
-            <div class="mb-3">
+            <div class="mb-3 text-body">
               <div class="mb-1"><%= exception.timestamp.toISOString() %></div>
               <div style="white-space: pre-wrap"><%= exception.stack %></div>
             </div>
