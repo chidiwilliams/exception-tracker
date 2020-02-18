@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>trackerr - Simple Exception Tracking</title>
 
+    <meta name="description" content="trackerr - Simple Exception Tracking" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -21,14 +22,36 @@
 
     <main>
       <div class="container">
-        <div class="controls mb-3">
+        <div class="controls mb-3 d-flex">
           <a
-            href="?timestampOrder=<%= timestampOrder === 'asc' ? 'desc' : 'asc' %>"
-            class="btn btn-light font-weight-bold"
+            href="?timestampOrder=<%= timestampOrder === 'asc' ? 'desc' : 'asc' %>&page=<%= page %>"
+            class="btn btn-light mr-2 <%= timestampOrder === 'desc' ? 'active' : '' %>"
           >
-            <%= timestampOrder === 'asc' ? 'Tail' : 'Head' %>
+            Tail
           </a>
+
+          <nav aria-label="pagination">
+            <ul class="pagination m-0">
+              <li class="page-item <%= hasPreviousPage ? '' : 'disabled' %>">
+                <a
+                  class="page-link"
+                  href="?timestampOrder=<%= timestampOrder %>&page=<%= page-1 %>"
+                  aria-disabled="<%= hasPreviousPage ? 'false' : 'true' %>"
+                  >Previous</a
+                >
+              </li>
+              <li class="page-item <%= hasNextPage ? '' : 'disabled' %>">
+                <a
+                  class="page-link"
+                  href="?timestampOrder=<%= timestampOrder %>&page=<%= page+1 %>"
+                  aria-disabled="<%= hasNextPage ? 'false' : 'true' %>"
+                  >Next</a
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
+
         <div class="mb-3 p-3 bg-light">
           <code>
             <% exceptions.forEach(function(exception){ %>

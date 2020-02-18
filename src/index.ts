@@ -1,6 +1,6 @@
 import ejs from 'ejs';
 import {
-  ExceptionQueryOpts,
+  ExceptionGetQueryOpts,
   ExceptionStore,
 } from 'trackerr-abstract-exception-store';
 
@@ -35,15 +35,33 @@ export class Client {
         return;
       }
 
-      const queryOpts: ExceptionQueryOpts = { timestampOrder: 'desc' };
+      const queryOpts: ExceptionGetQueryOpts = {
+        timestampOrder: 'desc',
+        page: 1,
+        limit: 100,
+      };
       if (req.query.timestampOrder === 'asc') {
         queryOpts.timestampOrder = req.query.timestampOrder;
       }
+      if (req.query.page) {
+        queryOpts.page = Number(req.query.page);
+      }
 
       const exceptions = await this.exceptionStore.get(queryOpts);
+      const countExceptions = await this.exceptionStore.count();
+
+      const hasNextPage =
+        (queryOpts.page! - 1) * queryOpts.limit! + exceptions.length <
+        countExceptions;
+      const hasPreviousPage = queryOpts.page !== 1;
       const template = await ejs.renderFile('templates/trackerr.html', {
         exceptions,
         timestampOrder: queryOpts.timestampOrder,
+        page: queryOpts.page,
+        limit: queryOpts.limit,
+        totalCount: countExceptions,
+        hasNextPage,
+        hasPreviousPage,
       });
 
       return res.send(template);
