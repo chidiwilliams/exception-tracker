@@ -51,6 +51,10 @@ The exception data may be stored in any data store of your choice. You may use o
 
 - [SQLite](https://github.com/chidiwilliams/trackerr-sqlite)
 
+## Comparison with other exception trackers
+
+trackerr is free and open-source. It provides a simple middleware that mounts on your app, instead of relying on a third-party solution (like Airbrake or Sentry) or managing another server (like Errbit).
+
 ## Roadmap to V1
 
 - [ ] Email notifications
