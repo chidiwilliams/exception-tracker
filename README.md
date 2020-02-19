@@ -32,7 +32,7 @@ Create a new client with a data store:
 import { Client } from 'trackerr';
 import SQLiteStore from 'trackerr-sqlite';
 
-const client = new Client(new SQLiteStore('db.sql'));
+const trackerr = new Client(new SQLiteStore('db.sql'));
 ```
 
 trackerr will automatically begin to watch for uncaught exceptions in your app's process.
@@ -40,7 +40,7 @@ trackerr will automatically begin to watch for uncaught exceptions in your app's
 To use the middleware:
 
 ```js
-server.use(client.middleware());
+server.use(trackerr.middleware());
 ```
 
 The middleware will serve the trackerr page at `/__exceptions`.
