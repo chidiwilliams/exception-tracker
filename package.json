@@ -1,12 +1,13 @@
 {
   "name": "trackerr",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Simple exception tracking for Express/Koa servers",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "exit 0",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "release": "np"
   },
   "author": "Chidi Williams",
   "license": "ISC",
@@ -18,5 +19,8 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "trackerr-abstract-exception-store": "^0.1.0"
-  }
+  },
+  "files": [
+    "dist/"
+  ]
 }
