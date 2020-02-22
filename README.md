@@ -5,9 +5,7 @@ Simple exception tracking for small Express/Koa servers.
 ## Features
 
 - Log uncaught exceptions to a data store of your choice
-
 - View exceptions in the browser with an Express/Koa middleware from your app
-
 - Get notified via email when an exception occurs (TODO)
 
 ## Installation
