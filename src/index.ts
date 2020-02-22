@@ -12,6 +12,8 @@ type Middleware = (
 
 export class Client {
   private exceptionsPageRoute = '/__exceptions';
+  private static trackerrTemplatePath =
+    __dirname + '/../templates/trackerr.html';
 
   constructor(private exceptionStore: ExceptionStore) {
     process.on('uncaughtException', async (err) => {
@@ -54,7 +56,7 @@ export class Client {
         (queryOpts.page! - 1) * queryOpts.limit! + exceptions.length <
         countExceptions;
       const hasPreviousPage = queryOpts.page !== 1;
-      const template = await ejs.renderFile('templates/trackerr.html', {
+      const template = await ejs.renderFile(Client.trackerrTemplatePath, {
         exceptions,
         timestampOrder: queryOpts.timestampOrder,
         page: queryOpts.page,
