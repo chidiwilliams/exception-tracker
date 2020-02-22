@@ -4,6 +4,15 @@
   "description": "Simple exception tracking for Express/Koa servers",
   "main": "dist/index.js",
   "repository": "https://github.com/chidiwilliams/trackerr",
+  "keywords": [
+    "javascript",
+    "error-monitoring",
+    "error-reporting",
+    "express",
+    "koa",
+    "connectjs",
+    "nodejs"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "exit 0",
