@@ -28,7 +28,7 @@ Create a new client with a data store:
 
 ```js
 import { Client } from 'trackerr';
-import SQLiteStore from 'trackerr-sqlite';
+import { SQLiteStore } from 'trackerr-sqlite';
 
 const trackerr = new Client(new SQLiteStore('db.sql'));
 ```
@@ -57,3 +57,7 @@ trackerr is free and open-source. It provides a simple middleware that mounts on
 
 - [ ] Email notifications
 - [ ] Search on exceptions page
+
+## Notes
+
+- The idea for this project was originally shared [here](https://github.com/open-source-ideas/open-source-ideas/issues/15#issue-183618259).
