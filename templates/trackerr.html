@@ -23,11 +23,11 @@
     <main>
       <div class="container">
         <div class="sticky-top bg-white pt-2 pb-2">
-          <div class="d-flex mb-2">
+          <div class="d-flex flex-column flex-sm-row">
             <form
               action=""
               method="get"
-              class="form form-inline w-100 border-right mr-2"
+              class="form form-inline w-100 border-right mr-2 mb-2 flex-nowrap"
             >
               <input
                 type="text"
@@ -38,36 +38,42 @@
               />
               <input type="hidden" name="timestampOrder" value="desc" />
               <input type="hidden" name="page" value="1" />
-              <button type="submit" class="btn btn-primary mr-2">Search</button>
+              <button type="submit" class="btn btn-primary mr-sm-2">
+                Search
+              </button>
             </form>
 
-            <a
-              href="?timestampOrder=<%= timestampOrder === 'asc' ? 'desc' : 'asc' %>&page=<%= page %>&q=<%= query %>"
-              class="btn btn-light mr-2 <%= timestampOrder === 'desc' ? 'active' : '' %>"
-            >
-              Tail
-            </a>
+            <div class="page-controls d-flex mb-2">
+              <a
+                href="?timestampOrder=<%= timestampOrder === 'asc' ? 'desc' : 'asc' %>&page=<%= page %>&q=<%= query %>"
+                class="btn btn-light mr-2 <%= timestampOrder === 'desc' ? 'active' : '' %>"
+              >
+                Tail
+              </a>
 
-            <nav aria-label="pagination">
-              <ul class="pagination m-0">
-                <li class="page-item <%= hasPreviousPage ? '' : 'disabled' %>">
-                  <a
-                    class="page-link"
-                    href="?timestampOrder=<%= timestampOrder %>&page=<%= page-1 %>&q=<%= query %>"
-                    aria-disabled="<%= hasPreviousPage ? 'false' : 'true' %>"
-                    >Previous</a
+              <nav aria-label="pagination">
+                <ul class="pagination m-0">
+                  <li
+                    class="page-item <%= hasPreviousPage ? '' : 'disabled' %>"
                   >
-                </li>
-                <li class="page-item <%= hasNextPage ? '' : 'disabled' %>">
-                  <a
-                    class="page-link"
-                    href="?timestampOrder=<%= timestampOrder %>&page=<%= page+1 %>&q=<%= query %>"
-                    aria-disabled="<%= hasNextPage ? 'false' : 'true' %>"
-                    >Next</a
-                  >
-                </li>
-              </ul>
-            </nav>
+                    <a
+                      class="page-link"
+                      href="?timestampOrder=<%= timestampOrder %>&page=<%= page-1 %>&q=<%= query %>"
+                      aria-disabled="<%= hasPreviousPage ? 'false' : 'true' %>"
+                      >Previous</a
+                    >
+                  </li>
+                  <li class="page-item <%= hasNextPage ? '' : 'disabled' %>">
+                    <a
+                      class="page-link"
+                      href="?timestampOrder=<%= timestampOrder %>&page=<%= page+1 %>&q=<%= query %>"
+                      aria-disabled="<%= hasNextPage ? 'false' : 'true' %>"
+                      >Next</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
           <div class="text-muted">
             Found <%= totalCount %> results
