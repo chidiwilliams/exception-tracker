@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Simple exception tracking for Express/Koa servers",
   "main": "dist/index.js",
+  "repository": "https://github.com/chidiwilliams/trackerr",
   "scripts": {
     "build": "tsc",
     "test": "exit 0",
