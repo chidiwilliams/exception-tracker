@@ -48,9 +48,14 @@ export class Client {
       if (req.query.page) {
         queryOpts.page = Number(req.query.page);
       }
+      if (req.query.q) {
+        queryOpts.query = req.query.q;
+      }
 
       const exceptions = await this.exceptionStore.get(queryOpts);
-      const countExceptions = await this.exceptionStore.count();
+      const countExceptions = await this.exceptionStore.count({
+        query: req.query.q,
+      });
 
       const hasNextPage =
         (queryOpts.page! - 1) * queryOpts.limit! + exceptions.length <
@@ -64,6 +69,7 @@ export class Client {
         totalCount: countExceptions,
         hasNextPage,
         hasPreviousPage,
+        query: queryOpts.query,
       });
 
       return res.send(template);
