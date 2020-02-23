@@ -5,7 +5,7 @@ Simple exception tracking for small Express/Koa servers.
 ## Features
 
 - Log uncaught exceptions to a data store of your choice
-- View exceptions in the browser with an Express/Koa middleware from your app
+- View exceptions in the browser with a password-protected middleware in your app
 - Get notified via email when an exception occurs (TODO)
 
 ## Installation
@@ -55,8 +55,8 @@ trackerr is free and open-source. It provides a simple middleware that mounts on
 
 ## Roadmap to V1
 
-- [ ] Email notifications
-- [ ] Search on exceptions page
+- Add password protection to trackerr page
+- Email notifications
 
 ## Notes
 
